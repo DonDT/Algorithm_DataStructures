@@ -410,8 +410,8 @@ function Pivot(arr, start = 0, end = arr.length + 1) {
     }
   }
   swap(arr, start, swapIndex);
-  console.log(arr);
+  //console.log(arr);
   return swapIndex;
 }
 
-console.log(Pivot([4, 8, 2, 1, 5, 7, 6, 3]));
+//console.log(Pivot([4, 8, 2, 1, 5, 7, 6, 3]));

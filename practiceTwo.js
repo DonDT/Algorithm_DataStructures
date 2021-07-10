@@ -129,3 +129,64 @@ function isAlphaNumeric(char) {
 }
 
 //console.log(charCount("hjbj   enianoj l<<löxnin"));
+
+// FREQUENCY COUNTER
+
+function frequencyCounter(arr1, arr2) {
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
+  let frequencyCounterOne = {};
+  let frequencyCounterTwo = {};
+
+  for (let val of arr1) {
+    frequencyCounterOne[val] = (frequencyCounterOne[val] || 0) + 1;
+  }
+  for (let val of arr2) {
+    frequencyCounterTwo[val] = (frequencyCounterTwo[val] || 0) + 1;
+  }
+  for (let key in frequencyCounterOne) {
+    /** let key of used to iterate over object, key in used to check a property or value, just that this checks the entire prototype chain, and not always recommended, unless i'm very sure, use hasOwnProperty */
+    //console.log(frequencyCounterTwo.hasOwnProperty(key));
+    //console.log(key in frequencyCounterTwo);
+    // if(!(key ** 2 in frequencyCounterOne)) return false
+
+    if (!(key ** 2 in frequencyCounterTwo)) return false;
+    if (frequencyCounterTwo[key ** 2] !== frequencyCounterOne[key])
+      return false;
+  }
+
+  return true;
+}
+
+//console.log(frequencyCounter([1, 2, 3, 2], [4, 9, 1, 4]));
+
+// ANAGRAM
+
+function anagram(str1, str2) {
+  if (str1 === "" && str2 === "") return true;
+  if (str1.length !== str2.length) return false;
+
+  let frequencyCounterOne = {};
+  let frequencyCounterTwo = {};
+
+  for (let letter of str1) {
+    frequencyCounterOne[letter] = (frequencyCounterOne[letter] || 0) + 1;
+  }
+  for (let letter of str2) {
+    frequencyCounterTwo[letter] = (frequencyCounterTwo[letter] || 0) + 1;
+  }
+
+  for (let key in frequencyCounterOne) {
+    if (!(key in frequencyCounterTwo)) return false;
+    if (frequencyCounterOne[key] !== frequencyCounterTwo[key]) return false;
+  }
+
+  return true;
+}
+
+//console.log(anagram("", ""));
+
+// More Efficient Anagram Solution
+// Loop through  just the first string
+// Pay attention
