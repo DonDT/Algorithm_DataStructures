@@ -667,19 +667,29 @@ function capitalizeFirst(arr) {
 // Nested even sum
 
 function nestedEvenSum(obj) {
-  console.log(obj);
+  let counter = 0;
+  if (Object.keys(obj).length === 0) return counter;
+
+  counterHelper(obj);
+
+  function counterHelper(obj) {
+    if (Object.keys(obj).length === 0) return counter;
+
+    for (let item in obj) {
+      if (typeof obj[item] === "number" && obj[item] % 2 === 0)
+        counter += obj[item];
+      else if (typeof obj[item] === "object") counterHelper(obj[item]);
+    }
+  }
+  return counter;
 }
 
 var obj1 = {
-  outer: 2,
-  obj: {
-    inner: 2,
-    otherObj: {
-      superInner: 2,
-      notANumber: true,
-      alsoNotANumber: "yup",
-    },
-  },
+  a: 2,
+  b: { b: 2, bb: { b: 3, bb: { b: 2 } } },
+  c: { c: { c: 2 }, cc: "ball", ccc: 5 },
+  d: 1,
+  e: { e: { e: 2 }, ee: "car" },
 };
 
 //console.log(nestedEvenSum(obj1));
@@ -708,4 +718,141 @@ function capitalizeWords(arr) {
   return newArr;
 }
 
-console.log(capitalizeWords(["i", "am", "learning", "recursion"]));
+//console.log(capitalizeWords(["i", "am", "learning", "recursion"]));
+
+// Collect all strings
+
+function collectAllStrings(obj) {
+  let strArr = [];
+
+  if (Object.keys(obj).length === 0) return strArr;
+
+  helperMethod(obj);
+
+  function helperMethod(obj) {
+    for (let item in obj) {
+      if (Object.keys(obj).length === 0) return strArr;
+
+      if (typeof obj[item] === "string") strArr.push(obj[item]);
+      else if (typeof obj[item] === "object") helperMethod(obj[item]);
+    }
+  }
+
+  return strArr;
+}
+
+const objStr = {
+  stuff: "foo",
+  data: {
+    val: {
+      thing: {
+        info: "bar",
+        moreInfo: {
+          evenMoreInfo: {
+            weMadeIt: "baz",
+          },
+        },
+      },
+    },
+  },
+};
+
+//console.log(collectAllStrings(objStr));
+
+// Stringify Numbers
+
+function stringifyNumbers(obj) {
+  if (Object.keys(obj).length === 0) return;
+
+  for (let item in obj) {
+    if (typeof obj[item] === "number") obj[item] = obj[item].toString();
+    else if (typeof obj[item] === "object") stringifyNumbers(obj[item]);
+  }
+  return obj;
+}
+
+let obj2 = {
+  num: 1,
+  test: [],
+  data: {
+    val: 4,
+    info: {
+      isRight: true,
+      random: 66,
+    },
+  },
+};
+
+//console.log(stringifyNumbers(obj2));
+
+//Searching Algorithms
+
+/**
+ * indexOf
+ * lastIndexOf
+ * find
+ *
+ * These use linear search, that checks each item linearly.
+ */
+
+// IndexOf implementation, lenear serach
+// one element at a time checked
+
+function indexOf(arr, num) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === num) return i;
+  }
+
+  return -1;
+}
+
+//console.log(indexOf([1, 3, 5, 2, 7, 9, 32], 12));
+
+// BINARY SEARCH
+// We can eliminate half of the data sets.
+// it has to be sorted, aphabetically of numerically.
+// we tack the middle element and check if it's after or before what we are looking for and eliminated accordingly.
+// keep doing that to the array
+
+// Binary serach
+function binarySearch(arr, num) {
+  // First establish the three pointers
+  let start = 0;
+  let end = arr.length - 1;
+  let middle = Math.floor((start + end) / 2);
+
+  // Next check if the first middle is the right value.
+  while (arr[middle] !== num && start <= end) {
+    // First since we didn't get the number, if the middle is less than our nunber
+    // then we move the end to middle -1.
+    // Otherwise, if our number is greater than the middle, we move the start, to middle + 1
+    if (num < arr[middle]) end = middle - 1;
+    else start = middle + 1;
+
+    middle = Math.floor((start + end) / 2);
+  }
+
+  return arr[middle] === num ? middle : -1;
+}
+
+//console.log(binarySearch([1, 2, 3, 4, 5, 6], 5));
+
+// NAIVE STRING SEARCH
+// Searching strings algorithms
+
+function naiveStrSearch(long, short) {
+  let count = 0;
+  for (var i = 0; i < long.length; i++) {
+    for (var j = 0; j < short.length; j++) {
+      if (short[j] !== long[i + j]) break;
+
+      if (j === short.length - 1) count++;
+    }
+  }
+
+  return count;
+}
+
+//console.log(naiveStrSearch("lorie loled shjlol", "lol"));
+
+// BUBBLE SORT ALGORITHM
