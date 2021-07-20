@@ -390,8 +390,8 @@ function mergeSort(arr) {
 // We pick a pivot element, compare it with every other element
 // Those that are less than are placed to the left and those greater than placed to the right
 // each time an item is less than, it is counted.
-// Then when all the lesser items are found, the pivot elemnt is placed right after it.
-// Then the same process repeated for the left and right sides as well.
+// Then when all the lesser items are found, the pivot elemnt is placed right after them, the lesser elements.
+// Then the same process is repeated for the left and right sides as well.
 
 function Pivot(arr, start = 0, end = arr.length + 1) {
   let pivot = arr[start];

@@ -856,3 +856,299 @@ function naiveStrSearch(long, short) {
 //console.log(naiveStrSearch("lorie loled shjlol", "lol"));
 
 // BUBBLE SORT ALGORITHM
+// Bubble sort, we bubble the largest value to the end of the array.
+// by comparing the first and the next, swap, the largest and on and on.
+//  Here we push the minimum element to the end of the array
+
+// SWAP
+
+function bubbleSort(arr) {
+  // noSwaps variable makes sure, if the array is already sorted, we break out
+  let noSwaps;
+  for (let i = 0; i < arr.length; i++) {
+    noSwaps = true;
+    for (let j = 0; j < arr.length; j++) {
+      if (arr[j] > arr[j + 1]) {
+        let temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+        noSwaps = false;
+      }
+    }
+    if (noSwaps) break;
+  }
+
+  return arr;
+}
+
+//console.log(bubbleSort([37, 45, 29, 8]));
+
+//SELECTION SORT
+
+// Here the sorted data is accumulated at the beginning, we take the
+// first element and assume it to be the smallest, and compare it with
+// the next, if somewhere along the line the next is smaller we swap the min value.
+// at the end we put the min value at the beginning
+// where ever we get the min, we swap it with where we started
+
+// Process
+// Store the first element as the minimum value
+// Compare it to next, if it's smaller update min
+// we save the index of where it is so we can swap
+// if the minimum value is not the value you initially started with, swap the two values.
+// Repeat this with the next element, until, array is sorted.
+
+function selectionSort(arr) {
+  // first outer loop makes sure for each item we want to alter the array
+
+  for (let i = 0; i < arr.length; i++) {
+    let lowest = i;
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[lowest] > arr[j]) {
+        lowest = j;
+      }
+    }
+    if (i !== lowest) {
+      let temp = arr[i];
+      arr[i] = arr[lowest];
+      arr[lowest] = temp;
+    }
+  }
+  return arr;
+}
+
+//console.log(selectionSort([1, 4, 2, 7, 5]));
+
+// INSERTION SORT
+
+// We insert one item at a time in the correct place.
+// we are taking an element one at a time and inserting it, in the correct spot.
+// We take this element and compare it backward, and puts it where it belongs inrelation to the previous values.
+
+// start by picking the second element in the array
+// compare with the one before it, if necessary, we swap them
+// Continue with the next element and if it is in the incorrect order, iterate through the sorted portion
+// to the left, to place the element in the correct place.
+
+// Repeat until the array is sorted.
+
+function insertionSort(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    let curVal = arr[i];
+
+    for (var j = i - 1; j >= 0 && arr[j] > curVal; j--) {
+      arr[j + 1] = arr[j];
+    }
+    arr[j + 1] = curVal;
+  }
+  return arr;
+}
+
+//console.log(insertionSort([1, 2, 9, 76, 4, 6]));
+
+// MERGE SORT
+
+// It is the combination of splitting up, merging and sorting
+// it exploits the fact that arrays of 0 or 1 elements are always sorted
+// It works by decomposing an array into smaller arrays of 0 or 1 elements, then building up a newly sorted array.
+// we take say an 8 element array and split it over and over untill we get 8 one element arrays.
+// then we merge them back together
+
+// STeps
+// create an empty array, take a look at the smallest values in each input array
+// While there are still values we haven't looked at..
+// if the value in the first array is smaller than, the value in the second array, push the value in the // // first array into our results and move on to the next value in the first array
+
+// If the value in the first array is larger than the value in the second array, push the value in the second /// array into our results and move on to the next value in the second array.
+
+// Once we exhaust one array, push in all remaining values from the other array
+
+// Merging two sorted arrays
+
+function merge(arr1, arr2) {
+  // Items would be merged into this
+  let results = [];
+  // indeicators to point through items in the arrays
+  let i = 0;
+  let j = 0;
+  // while there is data in both arrays, before we reach their end
+
+  while (i < arr1.length && j < arr2.length) {
+    // we compare and put the smaller item into results
+    if (arr1[i] < arr2[j]) {
+      results.push(arr1[i]);
+      i++;
+    } else {
+      results.push(arr2[j]);
+      j++;
+    }
+  }
+  // while there are items in i, push these items
+  while (i < arr1.length) {
+    results.push(arr1[i]);
+    i++;
+  }
+
+  // while there are items in j, push these items
+  while (j < arr2.length) {
+    results.push(arr2[j]);
+    j++;
+  }
+
+  return results;
+}
+
+//console.log(merge([1, 10, 50], [2, 14, 99, 100]));
+
+// The merge function
+
+// Goal
+// break the array into halves, again and again until their length is less than or equal to 1
+// then we merge them back using the merge function
+
+function mergeSort(arr) {
+  if (arr.length <= 1) return arr;
+  let midPoint = Math.floor(arr.length / 2);
+  let left = mergeSort(arr.slice(0, midPoint));
+  let right = mergeSort(arr.slice(midPoint));
+  return merge(left, right);
+}
+
+//console.log(mergeSort([10, 24, 76, 73, 72, 1, 9]));
+
+// QUICK SORT
+
+// Partition or Pivot
+
+// ### QUICK SORT ### //
+// We pick a pivot element, compare it with every other element
+// Those that are less than are placed to the left and those greater than placed to the right
+// each time an item is less than, it is counted.
+// Then when all the lesser items are found, the pivot elemnt is placed right after them, the lesser elements.
+// Then the same process is repeated for the left and right sides as well.
+
+function pivot(arr, start = 0, end = arr.length + 1) {
+  // start with selecting a pivot
+  let pivot = arr[start];
+  // next the index we are going to swap the pivot at the end
+  let swapIndex = start;
+  // We loop over each item and compare it
+
+  for (let i = start + 1; i < arr.length; i++) {
+    function swap(array, i, j) {
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    if (pivot > arr[i]) {
+      // first we register the next index of pivot
+      swapIndex++;
+      // then we swap the smaller value with the greater one
+      swap(arr, swapIndex, i);
+    }
+  }
+  // finally swap the pivot element with the swapIndex, to put it in it's final position
+  // Since all numbers to the left and right have been compared
+
+  swap(arr, start, swapIndex);
+
+  return swapIndex;
+}
+
+//console.log(pivot([4, 8, 2, 1, 5, 7, 6, 3]));
+
+// Steps
+
+// call the pivot helper on the array
+// Recursively call quick sort on the left side and right side, we are not making a new array
+
+function quickSort(arr, left = 0, right = arr.length - 1) {
+  if (left < right) {
+    let pivotIndex = pivot(arr, left, right);
+    // The initial left and right are the start and end of the array.
+    // Yet, we need to call it to the left of the pivot and the right
+    // so to the left, right = pivotIndex - 1, left = 0
+    // right = pivotIdex + 1
+
+    // left
+    quickSort(arr, left, pivotIndex - 1);
+    // right
+    quickSort(arr, pivotIndex + 1, right);
+
+    // we want to stop when we hit a sub array that is 1 or 0 length.
+    // As the sub arrays becomes smaller based on the pivot, left and right comes closer together
+  }
+  return arr;
+}
+
+//console.log(quickSort([4, 8, 2, 1, 5, 7, 6, 3, 78, -56]));
+
+// TIME AND SPACE COMPLEXITY
+
+// RADIX SORT
+
+// this does not use comparisons and only works with numbers.
+// it explores the fact that more digits means bigger number.
+
+// We take the last degit in each number and put them in a bucket of all numbers having that digit,
+// then collect them in an array in that order from the bucket. Them take the next digit in the number and place them in the bucket and on and on.
+// Buckets from 0 t0 9
+
+// Helper methods
+
+// getDigit, takes a number at a positiona nd returns the digit at that position.
+
+function getDigit(num, i) {
+  return Math.floor(Math.abs(num) / Math.pow(10, i)) % 10;
+}
+
+// Next  helper, we need to know how many times we need to re-order things
+// So, we need to find the number with the most digit
+
+function digitCount(num) {
+  if (num === 0) return 1;
+  return Math.floor(Math.log10(Math.abs(num))) + 1;
+}
+
+// Most digits, takes a list of digits and return which number has the most digits.
+
+function mostDigits(nums) {
+  let maxDigits = 0;
+  for (let i = 0; i < nums.length; i++) {
+    maxDigits = Math.max(maxDigits, digitCount(nums[i]));
+  }
+  return maxDigits;
+}
+
+// Steps
+// Define a nunber that accepts a list of digits.
+// Find which number has the largest number of digits
+// loop from zero to largest number of digits
+// For each iteration, create bucket for each digit
+// replace our existing array with values in our buckets starting from zero and going up to 9
+// return list at the end
+
+function radixSort(nums) {
+  // first find the max digit
+  let maxDigitCount = mostDigits(nums);
+  // Now loop max number of digits times
+  for (let k = 0; k < maxDigitCount; k++) {
+    // here we make our bucket
+    let digitsBuckets = Array.from({ length: 10 }, () => []);
+    for (let i = 0; i < nums.length; i++) {
+      // we take each number and at position k, what value do we get
+      let digit = getDigit(nums[i], k);
+      // we get the digit and push into the correct index
+      digitsBuckets[digit].push(nums[i]);
+    }
+    nums = [].concat(...digitsBuckets);
+  }
+
+  return nums;
+}
+
+//console.log(radixSort([23, 561, 6899, 5442, 7, 45]));
+
+// RADIX SORT BIG O
+// Time complexity O(nk), k = length of digit, n = length of array
+// Space complexity => O(n + k)
