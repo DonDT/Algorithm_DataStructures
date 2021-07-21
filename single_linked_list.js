@@ -18,15 +18,15 @@
 // Singly linked list means each element is only connected one dimentionally to the next.
 // Doubly linked list has a connection pointing back to the previous node.
 
-class Node {
-  // We need the node because, it stores a piece of data, each item in the list is a node
-  constructor(val) {
-    // this data is called val
-    this.val = val;
-    // then it stores a reference to the next val or node
-    this.next = null;
-  }
-}
+// class Node {
+//   // We need the node because, it stores a piece of data, each item in the list is a node
+//   constructor(val) {
+//     // this data is called val
+//     this.val = val;
+//     // then it stores a reference to the next val or node
+//     this.next = null;
+//   }
+// }
 
 class SinglyLinkedList {
   constructor() {
@@ -34,22 +34,22 @@ class SinglyLinkedList {
     this.tail = null;
     this.length = 0;
   }
-  push(val) {
-    // first create a new node
-    let newNode = new Node(val);
-    if (!this.head) {
-      this.head = newNode;
-      this.tail = this.head;
-    } else {
-      // first add to the current tail
-      this.tail.next = newNode;
-      // move the tail marker over
-      this.tail = newNode;
-    }
-    this.length++;
-    // reture the whole list
-    return this;
-  }
+  // push(val) {
+  //   // first create a new node
+  //   let newNode = new Node(val);
+  //   if (!this.head) {
+  //     this.head = newNode;
+  //     this.tail = this.head;
+  //   } else {
+  //     // first add to the current tail
+  //     this.tail.next = newNode;
+  //     // move the tail marker over
+  //     this.tail = newNode;
+  //   }
+  //   this.length++;
+  //   // reture the whole list
+  //   return this;
+  // }
 
   pop() {
     // return undefined if no items
@@ -210,10 +210,10 @@ class SinglyLinkedList {
   }
 }
 
-const list = new SinglyLinkedList();
+// const list = new SinglyLinkedList();
 // list.push("Hello ");
-// list.push("What up");
-// list.push("say What!!!");
+// // list.push("What up");
+// // list.push("say What!!!");
 
 // console.log(list);
 // console.log(list.reverse());
@@ -225,3 +225,7 @@ const list = new SinglyLinkedList();
 // Access O(n)
 
 // deletion and insertion at the beginning, linked lists are better
+
+// DOUBLY LINKED LISTS, each node points to both the previous and the next item
+
+// Doubly linked list takes more memory
