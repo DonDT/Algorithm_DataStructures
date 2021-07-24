@@ -129,14 +129,3 @@ class MaxBinaryHeap {
 // console.log(heap.extractMax());
 
 // console.log(heap);
-
-// PRIORITY QUEUE
-/**
- * Data structure where each  node, element has a priority associated with it.
- * They are seperate from queue, can be implemented with an array or list, just that they are slower
- *
- * This is like a heap, min or max, but the various levels denotes priority.
- * First we add to the heap and then locate it's based on it's priority level.
- *
- * Same as max or min binary heap, when we extract the max item, we replace with the last item, and have it sync down to the correct spot
- */
