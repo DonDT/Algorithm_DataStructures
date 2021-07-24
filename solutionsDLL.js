@@ -1,4 +1,4 @@
-console.log("Solutions file");
+//console.log("Solutions file DLL");
 // DLL push Exercise
 
 // Doubly linked lists are lists that have left and right connections
@@ -7,13 +7,13 @@ console.log("Solutions file");
 // Next the class should instantiate the left and right connections for a DDL.
 
 // The node shows one data point how it's supposed to look like
-class Node {
-  constructor(val) {
-    this.val = val;
-    this.next = null;
-    this.prev = null;
-  }
-}
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null;
+//     this.prev = null;
+//   }
+// }
 
 // The class shows the entire array how it's to look like, it's properties.
 class DoublyLL {
@@ -228,7 +228,7 @@ class DoublyLL {
   }
 }
 
-let myDoublyLinkedList = new DoublyLL();
+//let myDoublyLinkedList = new DoublyLL();
 
 // myDoublyLinkedList.push("Love");
 // myDoublyLinkedList.push("Akasha");
@@ -240,8 +240,8 @@ let myDoublyLinkedList = new DoublyLL();
 // //console.log(myDoublyLinkedList.shift());
 // console.log(myDoublyLinkedList);
 
-myDoublyLinkedList.push(5).push(10).push(15).push(20);
-console.log(myDoublyLinkedList);
-console.log(myDoublyLinkedList.reverse());
+// myDoublyLinkedList.push(5).push(10).push(15).push(20);
+// console.log(myDoublyLinkedList);
+// console.log(myDoublyLinkedList.reverse());
 
-console.log(myDoublyLinkedList);
+// console.log(myDoublyLinkedList);
